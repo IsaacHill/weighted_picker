@@ -45,18 +45,19 @@ const addEntry = (entry, list = null) => {
     
 }
 
+const addEntryToList = (entry, list) => {
+    
+}
+
 // checks if entry already exists.
 // validates if entry is valid 
 const obtainEntry = (entry) => {
-    db.transaction((txn) => {
-        getEntry(txn, name)
-    },)
+    const query = "SELECT id from entires WHERE name = ?"
+    db.transaction((tx) => {
+        tx.executeSql(sqlStatement, arguments, success, error)
+    })
 }
 
-// searches database for entry
-const getEntry = (tx) => {
-    tx.executeSql(sqlStatement, arguments, success, error)
-}
 
 const createListInTable = async(name, description) => {
     const query = "insert into lists (name, description) values (?, ?)";
@@ -72,6 +73,7 @@ const createListInTable = async(name, description) => {
         })
     })
 }
+
 
 const listExists = (list_name) => {
     const query = `SELECT id FROM lists WHERE name = ?;`
